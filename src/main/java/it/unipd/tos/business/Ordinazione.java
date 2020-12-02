@@ -15,10 +15,12 @@ public class Ordinazione implements TakeAwayBill {
 public double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws TakeAwayBillException{
 double totale =0;
 int contaGelati = 0;
+double totBudGel =0;
 for(MenuItem a : itemsOrdered) {
 totale+=a.getPrezzo();
-if (a.itemType==Categoria.Gelati) {
+if (a.itemType==Categoria.Gelati || a.itemType==Categoria.Budini) {
 contaGelati++;
+totBudGel+=a.getPrezzo();
 }
 }
 MenuItem min = new MenuItem(Categoria.Gelati, "prova", 9999999);
@@ -31,6 +33,10 @@ min=b;
 }
 }
 totale=totale-(min.getPrezzo()/2);
+totBudGel=totBudGel-(min.getPrezzo()/2);
+}
+if(totBudGel>50) {
+totale=totale-(totale*0.10);
 }
 return totale;
 }
