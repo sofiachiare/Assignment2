@@ -11,4 +11,12 @@ String nome;
 
 String cognome;
 
+double eta;
+
+public User (double e) {
+ID=0;
+nome="Sofia";
+cognome="Chiarello";
+eta=e;
+}
 }

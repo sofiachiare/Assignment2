@@ -29,7 +29,7 @@ double p =0;
 Ordinazione ord = new Ordinazione();
 try  {
 			
-p = ord.getOrderPrice(tmp, new User());
+p = ord.getOrderPrice(tmp, new User(24));
 } catch ( TakeAwayBillException e){
 System.out.println(e.getMessage());
 } 
@@ -51,7 +51,7 @@ tmp.add(new MenuItem(Categoria.Gelati, "Fragola", 2D));
 double p =0;
 Ordinazione ord = new Ordinazione();
 try  {			
-p = ord.getOrderPrice(tmp, new User());
+p = ord.getOrderPrice(tmp, new User(24));
 } catch ( TakeAwayBillException e){
 System.out.println(e.getMessage());
 } 
@@ -75,7 +75,7 @@ tmp.add(new MenuItem(Categoria.Budini, "Budino della principessa", 18D));
 double p =0;
 Ordinazione ord = new Ordinazione();
 try  {			
-p = ord.getOrderPrice(tmp, new User());
+p = ord.getOrderPrice(tmp, new User(24));
 } catch ( TakeAwayBillException e){
 System.out.println(e.getMessage());
 } 
@@ -124,7 +124,7 @@ tmp.add(new MenuItem(Categoria.Gelati, "Pistacchio", 2.3D ));
 tmp.add(new MenuItem(Categoria.Gelati, "Coppa Maxi", 8.0D ));
 tmp.add(new MenuItem(Categoria.Gelati, "Limone", 2.5D));
 Ordinazione ord = new Ordinazione();
-ord.getOrderPrice(tmp, new User());
+ord.getOrderPrice(tmp, new User(18));
 }
 
 @Test
@@ -136,10 +136,31 @@ tmp.add(new MenuItem(Categoria.Bevande, "Coca Cola", 5.6D));
 double p =0;
 Ordinazione ord = new Ordinazione();
 try  {			
-p = ord.getOrderPrice(tmp, new User());
+p = ord.getOrderPrice(tmp, new User(23));
 } catch ( TakeAwayBillException e){
 System.out.println(e.getMessage());
 } 
 assertEquals(6.1, p,0);
 }
+
+@Test
+public void GetOrderPrice_DieciGratistest () {
+List<MenuItem> tmp = new ArrayList<MenuItem>();
+
+tmp.add(new MenuItem(Categoria.Bevande, "Coca Cola", 5.6D));
+
+double p =0;
+
+Ordinazione ord = new Ordinazione();
+for (int i=0; i<25; i++) {
+
+try  {		
+p = ord.getOrderPrice(tmp, new User(10));
+} catch ( TakeAwayBillException e){
+System.out.println(e.getMessage());
 }
+assertTrue(p==6.1 || p==0);
+}
+}
+}
+
