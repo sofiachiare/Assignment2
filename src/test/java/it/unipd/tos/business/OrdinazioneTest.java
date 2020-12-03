@@ -22,7 +22,9 @@ List<MenuItem> tmp = new ArrayList<MenuItem>();
 tmp.add(new MenuItem(Categoria.Gelati, "Coppa Nafta", 2.5D ));
 tmp.add(new MenuItem(Categoria.Budini, "Pinguino", 1.3D ));
 tmp.add(new MenuItem(Categoria.Bevande, "Coca Cola", 2.5D));
-tmp.add(new MenuItem(Categoria.Bevande, "Fanta", 2.5D));		
+tmp.add(new MenuItem(Categoria.Bevande, "Fanta", 2.5D));
+tmp.add(new MenuItem(Categoria.Bevande, "Coca Cola", 2.5D));
+tmp.add(new MenuItem(Categoria.Bevande, "Fanta", 2.5D));
 double p =0;
 Ordinazione ord = new Ordinazione();
 try  {
@@ -31,7 +33,7 @@ p = ord.getOrderPrice(tmp, new User());
 } catch ( TakeAwayBillException e){
 System.out.println(e.getMessage());
 } 
-assertEquals(8.8, p,0);
+assertEquals(13.8, p,0);
 
 }
 
@@ -123,5 +125,21 @@ tmp.add(new MenuItem(Categoria.Gelati, "Coppa Maxi", 8.0D ));
 tmp.add(new MenuItem(Categoria.Gelati, "Limone", 2.5D));
 Ordinazione ord = new Ordinazione();
 ord.getOrderPrice(tmp, new User());
+}
+
+@Test
+public void GetOrderPrice_MenoDiDiecitest () {
+List<MenuItem> tmp = new ArrayList<MenuItem>();
+
+tmp.add(new MenuItem(Categoria.Bevande, "Coca Cola", 5.6D));
+
+double p =0;
+Ordinazione ord = new Ordinazione();
+try  {			
+p = ord.getOrderPrice(tmp, new User());
+} catch ( TakeAwayBillException e){
+System.out.println(e.getMessage());
+} 
+assertEquals(6.1, p,0);
 }
 }

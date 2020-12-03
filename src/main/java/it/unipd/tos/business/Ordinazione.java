@@ -32,7 +32,7 @@ for(MenuItem b : itemsOrdered) {
 if(b.itemType==Categoria.Gelati) {
 if(b.getPrezzo()<min.getPrezzo()) {
 min=b;
-} 
+}
 }
 }
 totale=totale-(min.getPrezzo()/2);
@@ -41,9 +41,17 @@ totBudGel=totBudGel-(min.getPrezzo()/2);
 if(totBudGel>50) {
 totale=totale-(totale*0.10);
 }
+totale=controlloTotale(totale);
 return totale;
 }else {
 throw new TakeAwayBillException ("Sono stati inseriti più di 30 elementi");
 }
+}
+
+public static double controlloTotale (double t) {
+if (t <10) {
+t = t +0.5;
+}
+return t;
 }
 }
