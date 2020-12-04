@@ -12,26 +12,20 @@ import it.unipd.tos.model.MenuItem;
 
 public class Ordinazione implements TakeAwayBill {
 
-//boolean nuovoGiorno;
+
 
 public int cont;
 
 public Ordinazione() {
-//nuovoGiorno = false;
+
 cont = 0;
 }
 
 public Ordinazione(int c) {
-//nuovoGiorno = false;
-cont = c;
-}
-/*
-public void cambiaGiorno(int c) {
-nuovoGiorno = false;
-cont = c;
 
+cont = c;
 }
-*/
+
 @Override
 public double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws TakeAwayBillException{
 double totale =0;
@@ -88,48 +82,11 @@ return 0.10;
 }
 return 0;
 }
-/*
 
-public double dieciGratis (User user, double totale ) {
 
-LocalTime ora = LocalTime.now();
-LocalTime up = LocalTime.of(18,00,00);
-LocalTime down = LocalTime.of(19,00,00);
-
-if((dataUltimo) != (LocalDate.now())) {
-cont=0;
-dataUltimo = LocalDate.now();
-}
-boolean prova = ora.isAfter(up) && ora.isBefore(down);
-if(fun(user,cont)) {
-if(prova) {
-Random rd = new Random();
-if(rd.nextBoolean()) {
-cont++;
-return 0;
-}
-}
-}
-
-return totale;
-
-}
-public boolean fun (User user, double cont) {
-if ((user.eta < 18) && (cont < 10)) {
-return true;
-}
-else { return false;}
-}
-*/
 
 public boolean controlloDieci (User user, MenuItem ord) {
-/*
-if((dataUltimo) != (LocalDate.now())) {
-cont=0;
-dataUltimo = LocalDate.now();
-System.out.println("entro");
-}
-*/
+
 if(cont>=10){
 return false;
 }
