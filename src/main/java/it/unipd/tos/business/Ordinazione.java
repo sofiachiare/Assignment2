@@ -3,8 +3,6 @@
 ////////////////////////////////////////////////////////////////////
 package it.unipd.tos.business;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Random;
 
@@ -14,15 +12,26 @@ import it.unipd.tos.model.MenuItem;
 
 public class Ordinazione implements TakeAwayBill {
 
-LocalDate dataUltimo;
+//boolean nuovoGiorno;
 
-double cont;
+public int cont;
 
 public Ordinazione() {
-dataUltimo = LocalDate.now();
+//nuovoGiorno = false;
 cont = 0;
 }
 
+public Ordinazione(int c) {
+//nuovoGiorno = false;
+cont = c;
+}
+/*
+public void cambiaGiorno(int c) {
+nuovoGiorno = false;
+cont = c;
+
+}
+*/
 @Override
 public double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws TakeAwayBillException{
 double totale =0;
@@ -37,7 +46,7 @@ contaGelati++;
 totBudGel+=a.getPrezzo();
 }
 }
-MenuItem min = new MenuItem(Categoria.Gelati, "prova", 9999999);
+MenuItem min = new MenuItem(Categoria.Gelati, "prova", 9999999, 16);
 if(conta<=30) {
 if (contaGelati>=5){
 for(MenuItem b : itemsOrdered) {
@@ -50,13 +59,15 @@ min=b;
 totale=totale-(min.getPrezzo()/2);
 totBudGel=totBudGel-(min.getPrezzo()/2);
 }
-if(totBudGel>50) {
-totale=totale-(totale*0.10);
-}
+
+totale=totale-(totale*controlloGelati(totBudGel));
 
 
+MenuItem primo = itemsOrdered.get(0);
 totale=controlloTotale(totale);
-totale=dieciGratis(user,totale);
+if(controlloDieci(user,primo)) {
+totale=0;
+}
 return totale;
 }else {
 throw new TakeAwayBillException ("Sono stati inseriti più di 30 elementi");
@@ -70,20 +81,30 @@ totale += 0.5;
 return totale;
 }
 
+public static double controlloGelati (double totGel) {
+
+if(totGel>50) {
+return 0.10;
+}
+return 0;
+}
+/*
+
 public double dieciGratis (User user, double totale ) {
 
 LocalTime ora = LocalTime.now();
-LocalTime up = LocalTime.of(17,00,00);
-LocalTime down = LocalTime.of(18,00,00);
+LocalTime up = LocalTime.of(18,00,00);
+LocalTime down = LocalTime.of(19,00,00);
 
-if(dataUltimo != LocalDate.now()) {
+if((dataUltimo) != (LocalDate.now())) {
 cont=0;
 dataUltimo = LocalDate.now();
 }
+boolean prova = ora.isAfter(up) && ora.isBefore(down);
 if(fun(user,cont)) {
-if(ora.isAfter(up) && ora.isBefore(down)) {
+if(prova) {
 Random rd = new Random();
-if (rd.nextBoolean()) {
+if(rd.nextBoolean()) {
 cont++;
 return 0;
 }
@@ -94,10 +115,43 @@ return totale;
 
 }
 public boolean fun (User user, double cont) {
-if (user.eta < 18 && cont < 10) {
+if ((user.eta < 18) && (cont < 10)) {
 return true;
 }
 else { return false;}
+}
+*/
+
+public boolean controlloDieci (User user, MenuItem ord) {
+/*
+if((dataUltimo) != (LocalDate.now())) {
+cont=0;
+dataUltimo = LocalDate.now();
+System.out.println("entro");
+}
+*/
+if(cont>=10){
+return false;
+}
+
+else{
+if (user.eta<18 && ord.orario>18 && ord.orario<19 ) {
+Random rd = new Random();
+if(rd.nextBoolean()) {
+cont++;
+return true;
+}
+
+
+}else {
+return false;
+}
+
+}
+
+
+
+return true;
 }
 
 }
