@@ -12,7 +12,7 @@ import it.unipd.tos.model.MenuItem;
 import org.junit.Test;
 
 
-public class OrdinazioneTest {
+public class OrdinazioniGiornTest {
 
 @Test
 public void GetOrderPrice_NonScontatitest()  {
@@ -26,7 +26,7 @@ tmp.add(new MenuItem(Categoria.Bevande, "Fanta", 2.5D,12));
 tmp.add(new MenuItem(Categoria.Bevande, "Coca Cola", 2.5D,12));
 tmp.add(new MenuItem(Categoria.Bevande, "Fanta", 2.5D,12));
 double p =0;
-Ordinazione ord = new Ordinazione();
+OrdinazioniGiorn ord = new OrdinazioniGiorn();
 try  {
 			
 p = ord.getOrderPrice(tmp, new User(24));
@@ -49,7 +49,7 @@ tmp.add(new MenuItem(Categoria.Gelati, "Coppa Maxi", 8.0D ,12));
 tmp.add(new MenuItem(Categoria.Gelati, "Limone", 2.5D,12));
 tmp.add(new MenuItem(Categoria.Gelati, "Fragola", 2D,12)); 
 double p =0;
-Ordinazione ord = new Ordinazione();
+OrdinazioniGiorn ord = new OrdinazioniGiorn();
 try  {			
 p = ord.getOrderPrice(tmp, new User(24));
 } catch ( TakeAwayBillException e){
@@ -73,7 +73,7 @@ tmp.add(new MenuItem(Categoria.Gelati, "Coppa Super", 20D,12));
 tmp.add(new MenuItem(Categoria.Budini, "Budino del re", 15D,12)); 
 tmp.add(new MenuItem(Categoria.Budini, "Budino della principessa", 18D,12)); 
 double p =0;
-Ordinazione ord = new Ordinazione();
+OrdinazioniGiorn ord = new OrdinazioniGiorn();
 try  {			
 p = ord.getOrderPrice(tmp, new User(24));
 } catch ( TakeAwayBillException e){
@@ -123,7 +123,7 @@ tmp.add(new MenuItem(Categoria.Bevande, "Coca Cola", 5.6D,12));
 tmp.add(new MenuItem(Categoria.Gelati, "Pistacchio", 2.3D,12 ));
 tmp.add(new MenuItem(Categoria.Gelati, "Coppa Maxi", 8.0D ,12));
 tmp.add(new MenuItem(Categoria.Gelati, "Limone", 2.5D,12));
-Ordinazione ord = new Ordinazione();
+OrdinazioniGiorn ord = new OrdinazioniGiorn();
 ord.getOrderPrice(tmp, new User(11));
 }
 
@@ -134,7 +134,7 @@ List<MenuItem> tmp = new ArrayList<MenuItem>();
 tmp.add(new MenuItem(Categoria.Bevande, "Coca Cola", 5.6D,12));
 
 double p =0;
-Ordinazione ord = new Ordinazione();
+OrdinazioniGiorn ord = new OrdinazioniGiorn();
 try  {			
 p = ord.getOrderPrice(tmp, new User(23));
 } catch ( TakeAwayBillException e){
@@ -151,7 +151,7 @@ tmp.add(new MenuItem(Categoria.Bevande, "Coca Cola", 5.6D, 18.17));
 
 double p =0;
 
-Ordinazione ord = new Ordinazione();
+OrdinazioniGiorn ord = new OrdinazioniGiorn();
 
 for (int i=0; i<25; i++) {
 
@@ -175,19 +175,19 @@ List<MenuItem> prova = new ArrayList<MenuItem>();
 
 prova.add(new MenuItem(Categoria.Bevande, "Coca Cola", 5.6D, 12));
 double p =0;
-double x = 0;
 
-Ordinazione ord = new Ordinazione(14);
-Ordinazione ord2 = new Ordinazione();
+
+OrdinazioniGiorn ord = new OrdinazioniGiorn(14);
+
 
 try  {
 p = ord.getOrderPrice(tmp, new User(3));
-x = ord2.getOrderPrice(prova, new User(35));
+
 } catch ( TakeAwayBillException e){
 System.out.println(e.getMessage());
 }
 assertEquals(6.1, p,0);
-assertEquals(6.1, x,0);
+
 }
 
 }

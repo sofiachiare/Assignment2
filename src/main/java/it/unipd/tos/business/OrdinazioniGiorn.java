@@ -10,18 +10,18 @@ import it.unipd.tos.business.exception.TakeAwayBillException;
 import it.unipd.tos.model.Categoria;
 import it.unipd.tos.model.MenuItem;
 
-public class Ordinazione implements TakeAwayBill {
+public class OrdinazioniGiorn implements TakeAwayBill {
 
 
 
 public int cont;
 
-public Ordinazione() {
+public OrdinazioniGiorn() {
 
 cont = 0;
 }
 
-public Ordinazione(int c) {
+public OrdinazioniGiorn(int c) {
 
 cont = c;
 }
